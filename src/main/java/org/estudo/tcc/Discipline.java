@@ -9,6 +9,7 @@ import java.util.List;
 @ToString
 @Getter
 public class Discipline {
+
     @SerializedName("disciplina")
     private String disciplina;
 
