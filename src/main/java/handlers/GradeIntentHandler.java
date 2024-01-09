@@ -1,4 +1,4 @@
-package alexas;
+package handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
@@ -6,37 +6,29 @@ import com.amazon.ask.model.Response;
 import converter.Converter;
 import requests.HttpRequests;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Objects;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class NotasIntentHandler implements RequestHandler {
+public class GradeIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
 
-        return input.matches(intentName(""));
+        return input.matches(intentName("GradeIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input)  {
 
-        String speechText = "nenhuma nota encontrada";
-        try {
-            speechText = getData();
-        }catch (Throwable throwable){
-            throwable.printStackTrace();
-        }
         return input.getResponseBuilder()
-                .withSpeech(speechText)
+                .withSpeech(getData())
                 .build();
 
     }
 
-    private String getData() throws URISyntaxException, IOException {
+    private String getData() {
 
         HttpRequests httpRequests = new HttpRequests("02296120164", "@DEJunior06");
 
