@@ -52,6 +52,24 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.amazon.alexa</groupId>
+            <artifactId>ask-sdk</artifactId>
+            <version>2.20.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazon.alexa</groupId>
+            <artifactId>ask-sdk-core</artifactId>
+            <version>2.20.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazon.alexa</groupId>
+            <artifactId>ask-sdk-apache-client</artifactId>
+            <version>2.20.2</version>
+        </dependency>
+
     </dependencies>
 
 </project>

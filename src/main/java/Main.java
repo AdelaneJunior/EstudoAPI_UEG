@@ -1,4 +1,6 @@
-package org.estudo.tcc;
+import converter.Converter;
+import jsonObjects.Discipline;
+import requests.HttpRequests;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -13,6 +15,10 @@ public class Main {
             httpRequests.enterPortalEstudante();
             httpRequests.getClassSchedule();
             httpRequests.getGrade();
+
+            if(Objects.nonNull(httpRequests.getJsonGrade())){
+                Converter.jsonToGradeForPeriod(httpRequests.getJsonGrade(), 6);
+            }
 
             if (Objects.nonNull(httpRequests.getJsonSchedule())) {
                 List<Discipline> disciplineList =

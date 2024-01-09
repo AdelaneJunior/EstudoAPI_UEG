@@ -1,4 +1,4 @@
-package org.estudo.tcc;
+package jsonObjects;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.ToString;

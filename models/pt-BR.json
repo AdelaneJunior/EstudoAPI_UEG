@@ -1,0 +1,30 @@
+{
+  "languageModel": {
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "NotasIntentHandler",
+        "samples": [
+          "quais são minhas notas"
+        ],
+        "slots": []
+      },
+      {
+        "name": "AMAZON.FallbackIntent",
+        "samples": []
+      }
+    ],
+    "invocationName": "hello world"
+  }
+}

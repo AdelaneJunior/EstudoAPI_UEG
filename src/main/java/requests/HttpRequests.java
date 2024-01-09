@@ -1,7 +1,8 @@
-package org.estudo.tcc;
+package requests;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import converter.Converter;
 import lombok.Getter;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
