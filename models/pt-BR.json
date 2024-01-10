@@ -39,6 +39,18 @@
           "samples": [
             "ola"
           ]
+        },
+        {
+          "name": "DetailedGradeIntent",
+          "slots": [
+            {
+              "name": "semestre",
+              "type": "AMAZON.Ordinal"
+            }
+          ],
+          "samples": [
+            "quais foram minhas notas de va no {semestre} semestre"
+          ]
         }
       ],
       "types": []

@@ -14,8 +14,8 @@ public class NotaList {
     private String va;
 
     @SerializedName("nota")
-    private float nota;
+    private Float nota;
 
     @SerializedName("nota_peso")
-    private float notaComPeso;
+    private Float notaComPeso;
 }
