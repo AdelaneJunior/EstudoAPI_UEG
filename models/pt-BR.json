@@ -17,9 +17,16 @@
         },
         {
           "name": "GradeIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "semestre",
+              "type": "AMAZON.Ordinal"
+            }
+          ],
           "samples": [
-            "quais são minhas grades"
+            "quais notas do {semestre} semestre estão disponíveis",
+            "quais foram minhas notas no {semestre} semestre",
+            "quais são minhas notas do {semestre} semestre"
           ]
         },
         {

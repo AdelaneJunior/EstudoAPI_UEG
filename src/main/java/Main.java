@@ -17,7 +17,7 @@ public class Main {
             httpRequests.getGrade();
 
             if(Objects.nonNull(httpRequests.getJsonGrade())){
-                Converter.jsonToGradeForPeriod(httpRequests.getJsonGrade(), 6);
+                Converter.jsonToGradeWithPeriod(httpRequests.getJsonGrade(), 6);
             }
 
             if (Objects.nonNull(httpRequests.getJsonSchedule())) {

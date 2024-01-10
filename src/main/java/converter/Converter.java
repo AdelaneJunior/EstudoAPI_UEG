@@ -63,7 +63,7 @@ public class Converter {
      * @param periodo int referente a qual perido deve ser filtrado as disciplinas
      * @return List de GradeList de Grade, preenchido caso tenha materias do perido solicitado, vazio caso n ache nenhuma
      */
-    public static List<Grade> jsonToGradeForPeriod(JsonArray jsonArray, int periodo){
+    public static List<Grade> jsonToGradeWithPeriod(JsonArray jsonArray, int periodo){
 
         List<Grade> grades = new ArrayList<>();
 
@@ -76,7 +76,7 @@ public class Converter {
         return grades;
     }
 
-    public static List<Grade> jsonToGradeForName(JsonArray jsonArray, String disciplina){
+    public static List<Grade> jsonToGradeWithName(JsonArray jsonArray, String disciplina){
 
         List<Grade> grades = new ArrayList<>();
 

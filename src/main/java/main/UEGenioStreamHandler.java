@@ -11,6 +11,7 @@ import handlers.LaunchRequestHandler;
 public class UEGenioStreamHandler extends SkillStreamHandler {
 
     private static Skill getSkill() {
+
         return Skills.standard()
                 .addRequestHandlers(
                         new GradeIntentHandler(),
