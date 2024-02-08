@@ -6,9 +6,9 @@ import com.google.gson.JsonElement;
 import jsonObjects.Discipline;
 import jsonObjects.Grade;
 import jsonObjects.PersonData;
+import jsonObjects.Schedule;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Converter {
 
@@ -26,11 +26,45 @@ public class Converter {
             List<Discipline> disciplineList = new ArrayList<>();
 
             for (JsonElement jsonElement : jsonArray) {
-                disciplineList.add(gson.fromJson(jsonElement, Discipline.class));
+                Discipline discipline = gson.fromJson(jsonElement, Discipline.class);
+                Map<String, String> diaHoraInicio = new HashMap<>();
+
+                for (Schedule schedule : discipline.getHorarioLista()){
+                    if(Objects.isNull(discipline.getDocente())){
+                        discipline.setDocente(schedule.getProfessor());
+                    }
+
+                    if (!diaHoraInicio.containsKey(schedule.getDiaDescricao())) {
+                        diaHoraInicio.put(schedule.getDiaDescricao(), schedule.getHoraInicio());
+                    }
+                }
+
+                discipline.setDiaHoraInicio(diaHoraInicio);
+
+                disciplineList.add(discipline);
             }
             return disciplineList;
         }
         return null;
+    }
+
+    public static HashMap<String, List<Discipline>> montaHorarioSemana(List<Discipline> disciplineList) {
+
+        HashMap<String, List<Discipline>> horarioAulasSemana = new HashMap<>();
+
+        for (Discipline discipline : disciplineList) {
+            discipline.getDiaHoraInicio().forEach((dia, hora) -> {
+                if (!horarioAulasSemana.containsKey(dia)) {
+                    List<Discipline> disciplines = new ArrayList<>();
+                    disciplines.add(discipline);
+                    horarioAulasSemana.put(dia, disciplines);
+                } else {
+                    horarioAulasSemana.get(dia).add(discipline);
+                }
+            });
+        }
+
+        return horarioAulasSemana;
     }
 
     public static String getAcuId(JsonElement jsonElement){

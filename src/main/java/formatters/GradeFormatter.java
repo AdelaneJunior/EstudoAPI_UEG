@@ -16,7 +16,8 @@ public class GradeFormatter {
 
         StringBuilder resposta = iniciaResposta(periodoInt);
 
-        resposta.append(SIMPLE_SEQUENCE_ANSWER.replace("NOTAFINAL", grade.getMediaFinal().toString()).replace("DISCIPLINA", grade.getDisciplina()));
+        resposta.append(SIMPLE_SEQUENCE_ANSWER.replace("NOTAFINAL",
+                grade.getMediaFinal().toString()).replace("DISCIPLINA", grade.getDisciplina()));
 
         return resposta.toString();
     }

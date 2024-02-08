@@ -59,7 +59,7 @@ public class HttpRequests {
             nvps.add(new BasicNameValuePair("cpf", getCpf()));
             nvps.add(new BasicNameValuePair("senha", getSenha()));
             httpPost.setEntity(new UrlEncodedFormEntity(nvps));
-            System.out.println("Execute request " + httpPost.getMethod() + " " + httpPost.getUri());
+//            System.out.println("Execute request " + httpPost.getMethod() + " " + httpPost.getUri());
             try {
                 CloseableHttpResponse httpResponse = httpClient.execute(httpPost, localContext);
                 return responseOK(httpResponse);

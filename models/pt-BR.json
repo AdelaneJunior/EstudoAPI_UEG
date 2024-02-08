@@ -51,6 +51,34 @@
           "samples": [
             "quais foram minhas notas de va no {semestre} semestre"
           ]
+        },
+        {
+          "name": "SingUpIntent",
+          "slots": [
+            {
+              "name": "cpfsenha",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Cadastro {cpfsenha}",
+            "Login {cpfsenha}",
+            "Cadastrar {cpfsenha}"
+          ]
+        },
+        {
+          "name": "ScheduleIntent",
+          "slots": [
+            {
+              "name": "dia",
+              "type": "AMAZON.DATE"
+            }
+          ],
+          "samples": [
+            "{dia} quais são as minhas aulas",
+            "Quais aulas eu vou ter {dia}",
+            "Quais aulas eu tenho {dia} "
+          ]
         }
       ],
       "types": []
