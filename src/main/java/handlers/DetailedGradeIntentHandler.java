@@ -28,9 +28,12 @@ public class DetailedGradeIntentHandler implements RequestHandler {
         IntentRequest request = (IntentRequest) input.getRequest();
         Slot periodo = request.getIntent().getSlots().get("semestre");
         int periodoInt = Integer.parseInt(periodo.getValue());
+        String speech = getData(periodoInt);
 
         return input.getResponseBuilder()
-                .withSpeech(getData(periodoInt))
+                .withSpeech(speech)
+                .withReprompt(speech)
+                .withSimpleCard("Notas VA detalhadas:", speech)
                 .build();
 
     }

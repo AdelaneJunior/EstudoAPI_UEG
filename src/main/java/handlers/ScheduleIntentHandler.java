@@ -31,9 +31,11 @@ public class ScheduleIntentHandler implements RequestHandler {
         IntentRequest request = (IntentRequest) input.getRequest();
         Slot diaSlot = request.getIntent().getSlots().get("dia");
         String data = diaSlot.getValue();
-
+        String speech = getData(data);
         return input.getResponseBuilder()
-                .withSpeech(getData(data))
+                .withSimpleCard("Aulas: ", speech)
+                .withSpeech(speech)
+                .withReprompt(speech)
                 .build();
 
     }
