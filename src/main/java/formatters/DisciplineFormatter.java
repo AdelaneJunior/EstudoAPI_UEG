@@ -102,12 +102,12 @@ public class DisciplineFormatter {
     }
     public static int dayIsTodayOrTomorrow(String day){
 
-        Locale locale = new Locale("pt","BR");
+        Locale locale = new Locale("pt","BR"); //defino que sera em portugues BR a escrita dos dias
         Date da = new Date();
-        TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo")); //defino a timezone da jvm para a de Sao Paulo UTC -3
         System.out.println("Date: " + da.toString());
         DateTime dt = new DateTime(da);
-        String diaSemana = new SimpleDateFormat("EE", locale).format(dt.toDate()).toUpperCase();
+        String diaSemana = new SimpleDateFormat("EE", locale).format(dt.toDate()).toUpperCase(); //converto a data gerada para dia da semana abreviado em upperCase
         String dia = diaSemana.substring(0, diaSemana.length()-1);
 
         System.out.println("Dia antes do primeiro if: "+dia);
@@ -131,8 +131,7 @@ public class DisciplineFormatter {
 
         java.util.Locale locale = new java.util.Locale("pt","BR");
         Date da = new Date(date.replace('-', '/'));
-        DateTime dt = new DateTime(da);
-        String diaSemana = new SimpleDateFormat("EE", locale).format(dt.toDate()).toUpperCase();
+        String diaSemana = new SimpleDateFormat("EE", locale).format(da).toUpperCase();
 
         return normalizeDayName(diaSemana.substring(0, diaSemana.length()-1));
     }

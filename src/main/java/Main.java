@@ -1,14 +1,26 @@
-import requests.HttpRequests;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) throws URISyntaxException, IOException {
 
-        HttpRequests httpRequests = new HttpRequests("02296120164", "@DEJunior06");
+        java.util.Locale locale = new java.util.Locale("pt","BR");
+        String date = "2024-02-15";
+        Date da = new Date(date.replace('-', '/'));
+        DateTime dt = new DateTime().withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone("America/Sao_Paulo")));
+        String diaSemana = new SimpleDateFormat("EE", locale).format(dt.toDate()).toUpperCase();
+
+        System.out.println(diaSemana);
+
+//        HttpRequests httpRequests = new HttpRequests("02296120164", "@DEJunior06");
 
 //        String day = "QUIN";
 //        java.util.Locale locale = new java.util.Locale("pt","BR");
