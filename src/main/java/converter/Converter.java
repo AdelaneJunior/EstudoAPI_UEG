@@ -35,7 +35,7 @@ public class Converter {
                     }
 
                     if (!diaHoraInicio.containsKey(schedule.getDiaDescricao())) {
-                        diaHoraInicio.put(schedule.getDiaDescricao(), schedule.getHoraInicio());
+                        diaHoraInicio.put(schedule.getDiaDescricao(), ajeitaHorasString(schedule));
                     }
                 }
 
@@ -46,6 +46,14 @@ public class Converter {
             return disciplineList;
         }
         return null;
+    }
+
+    private static String ajeitaHorasString(Schedule schedule) {
+        String hora = schedule.getHoraInicio().substring(0, schedule.getHoraInicio().length()-3).replace(":", "e");
+        if (hora.endsWith("00")){
+            return hora.substring(0, hora.length()-3);
+        }
+        return hora;
     }
 
     public static HashMap<String, List<Discipline>> montaHorarioSemana(List<Discipline> disciplineList) {

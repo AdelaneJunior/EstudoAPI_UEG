@@ -1,102 +1,23 @@
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.text.Normalizer;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.regex.Pattern;
 
 public class Main {
-    public static void main(String[] args) throws URISyntaxException, IOException {
-
-        java.util.Locale locale = new java.util.Locale("pt","BR");
-        String date = "2024-02-15";
-        Date da = new Date(date.replace('-', '/'));
-        DateTime dt = new DateTime().withZone(DateTimeZone.forTimeZone(TimeZone.getTimeZone("America/Sao_Paulo")));
-        String diaSemana = new SimpleDateFormat("EE", locale).format(dt.toDate()).toUpperCase();
-
-        System.out.println(diaSemana);
-
-//        HttpRequests httpRequests = new HttpRequests("02296120164", "@DEJunior06");
-
-//        String day = "QUIN";
-//        java.util.Locale locale = new java.util.Locale("pt","BR");
-//        Date da = new Date();
-//        TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
-//        System.out.println("Date: " + da.toString());
-//        DateTime dt = new DateTime(da);
-//        String diaSemana = new SimpleDateFormat("EE", locale).format(dt.toDate()).toUpperCase();
-//        String dia = diaSemana.substring(0, diaSemana.length()-1);
-//
-//        System.out.println("Dia antes do primeiro if: "+dia);
-//        if (normalizar(dia).equals(day)){
-//            System.out.println("1");
-//        }
-//
-//        diaSemana = new SimpleDateFormat("EE", locale).format(dt.plusDays(1).toDate()).toUpperCase();
-//        dia = diaSemana.substring(0, diaSemana.length()-1);
-//
-//        System.out.println("Dia dps do primeiro if: "+dia);
-//
-//        if (normalizar(dia).equals(day)){
-//            System.out.println("2");
-//        }
-//
-//        System.out.println("0");
-
-//        if(httpRequests.doLogin()) {
-//            httpRequests.enterPortalEstudante();
-//            httpRequests.getClassSchedule();
-//            httpRequests.getGrade();
-//
-//            if(Objects.nonNull(httpRequests.getJsonGrade())){
-//                Converter.jsonToGradeWithPeriod(httpRequests.getJsonGrade(), 6);
-//            }
-//
-//            if (Objects.nonNull(httpRequests.getJsonSchedule())) {
-//                List<Discipline> disciplineList =
-//                        Converter.jsonToDiscipline(httpRequests.getJsonSchedule());
-//
-//                if (Objects.nonNull(disciplineList)) {
-//                    HashMap<String, List<Discipline>> horarioSemana = Converter.montaHorarioSemana(disciplineList);
-////                    for (String dia : horarioSemana.keySet()){
-////
-////                        Date da = new Date();
-////                        DateTime dt = new DateTime(da);
-////                        String diaSemana = new SimpleDateFormat("EE").format(dt.toDate()).toUpperCase();
-////                        System.out.println(dia + "\n" + horarioSemana.get(diaSemana.substring(0, diaSemana.length()-1)) + "\n");
-////
-////                    }
-//
-//                    String dataEntrada = "2024-02-10";
-//
-//                    Date da = new Date(dataEntrada.replace('-', '/'));
-//                    DateTime dt = new DateTime(da);
-//                    String diaSemana = new SimpleDateFormat("EE").format(dt.toDate()).toUpperCase();
-//                    String dia = diaSemana.substring(0, diaSemana.length()-1);
-//
-//                    System.out.println(dia + ": " +horarioSemana.get(normalizar(dia)) + "\n");
-//
-////                    for (Discipline discipline : disciplineList) {
-////                        System.out.println("Disciplina e horarios: " + discipline.toString() + "\n");
-////                    }
-//                }
-//
-//            }
-//
-////            if(Objects.nonNull(httpRequests.getJsonGrade())){
-////
-//////                System.out.println(Converter.jsonToGrade((httpRequests.getJsonGrade())));
-////            }
-//        }
-    }
-
-    public static String normalizar(String str) {
-        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
-        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+//        String jwt = ".eyJzdWIiOiJlN2I5OGMyMS02YzBjLTRkOGItODJmMy1lNWVkMjE0YjQ1ODAiLCJhdWQiOiI2MTZjNjU3ODYxNjE3NTc0Njg3NTY1Njc2NTZlNjk2ZiIsIm5iZiI6MTcxNjc2MTM1Nywic2NvcGUiOlsicmVmcmVzaF90b2tlbiIsImF1dGhvcml6YXRpb25fY29kZSJdLCJpc3MiOiJodHRwczovL2F1dGgtdWVnZW5pby5hcHAuZ3VpbGlhbm8uY29tLmJyIiwiZXhwIjoxNzQ4Mjk3MzU3LCJpYXQiOjE3MTY3NjEzNTcsImp0aSI6IjczOGVlYTE4LWY3NDQtNDA3OS04NzU0LTc5Nzk3ZjYxMmMyNCJ9.AeqBHsvdp_yZOXD5XIqKdUKCZckh6dyZmDh52aFX7qQRANCTlZHMU4zE4Nlz1okHoU-dRBjGSa0KHkIIuFr8GXaiDqxyhr0rLiVLsCZKogJWa--kxM7nLYe_MaZoEssvNrVDosG2UGmnvRfplAqQEp50C2o2yaxahxDSoKCXTczXPUMcgXDelP9aL9OG6f3vADoVTZOvf_ddReNulF97Ahuiv5a2qDdqvjHWSji9vpy5ubNe5uJygW4-jVNDIVCvvoAkGdO3FbyUbUp2_3knqECFXlEsttFwpJ8RGnI5LVYY6yl28rQRaulcrPf3jGhlXMarPu9m1U8IofpmSjgwdQ";
+//        String day = "2024-05-24";
+//        Gson gson = new Gson();
+//        HttpRequest postRequest = HttpRequest.newBuilder()
+//                .uri(new URI("https://uegenio.app.guiliano.com.br/api/make-response/"+"ScheduleByDay"))
+//                .headers("Authorization","Bearer "+jwt,
+//                        "Content-Type","application/json",
+//                        "Accept", "text/plain")
+//                .POST(HttpRequest.BodyPublishers.ofString("[\""+day+"\"]"))
+//                .build();
+//        HttpClient httpClient = HttpClient.newHttpClient();
+//        HttpResponse<String> httpResponse =
+//                httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
+//        System.out.println("aposrques");
+//        System.out.println("body: "+httpResponse.body());
+//        System.out.println("response: "+ httpResponse);
     }
 }

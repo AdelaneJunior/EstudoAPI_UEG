@@ -23,7 +23,6 @@ public class DisciplineFormatter {
     public static final String RESPOSTA_SEMANA_TODA_QUINTA = ", Quinta-feira: ";
     public static final String RESPOSTA_SEMANA_TODA_SEXTA = ", Sexta-feira: ";
     public static final String RESPOSTA_SEMANA_TODA_SABADO = ", Sábado: ";
-
     public static final String SEQUENCIA_RESPOSTA= ", DISCIPLINA das HORA_INICIO até HORA_FIM";
 
 
@@ -41,30 +40,30 @@ public class DisciplineFormatter {
             case 0 -> formatterDisciplineDayToSpeech(dayInFull, weekSchedule.get(dayInFull));
 
             case 1 -> //caso o dia perguntado for hoje
-                    formatterDisciplineTodayToSpeech(weekSchedule.get(dayInFull));
+                    formatterDisciplineTodayToSpeech(weekSchedule.get(dayInFull), dayInFull);
 
             case 2 -> //caso o dia perguntado for amanhã
-                    formatterDisciplineTomorrowToSpeech(weekSchedule.get(dayInFull));
+                    formatterDisciplineTomorrowToSpeech(weekSchedule.get(dayInFull), dayInFull);
 
             default -> "Você não tem aula no dia perguntado";
         };
 
     }
 
-    public static String formatterDisciplineTodayToSpeech(List<Discipline> disciplineList){
+    public static String formatterDisciplineTodayToSpeech(List<Discipline> disciplineList, String dayInFull){
         System.out.println("Case 1");
-        return makeSpeech(disciplineList, INICIO_RESPOSTA_HOJE);
+        return makeSpeech(disciplineList, INICIO_RESPOSTA_HOJE, dayInFull);
     }
-    private static String formatterDisciplineTomorrowToSpeech(List<Discipline> disciplineList) {
+    private static String formatterDisciplineTomorrowToSpeech(List<Discipline> disciplineList, String dayInFull) {
         System.out.println("Case 2");
-        return makeSpeech(disciplineList, INICIO_RESPOSTA_AMANHA);
+        return makeSpeech(disciplineList, INICIO_RESPOSTA_AMANHA, dayInFull);
 
     }
 
-    private static String formatterDisciplineDayToSpeech(String day, List<Discipline> disciplineList) {
+    private static String formatterDisciplineDayToSpeech(String dayInFull, List<Discipline> disciplineList) {
 
        System.out.println("Case 0");
-       WeekDay dayComplete = WeekDay.getByAbreviado(day);
+       WeekDay dayComplete = WeekDay.getByAbreviado(dayInFull);
 
        if (Objects.nonNull(dayComplete)){
 
@@ -78,7 +77,7 @@ public class DisciplineFormatter {
            }
 
            for ( Discipline discipline : disciplineList){
-               speech.append(discipline.getDisciplina()).append(" e ");
+               speech.append(discipline.getDisciplina()).append(" às ").append(discipline.getDiaHoraInicio().get(dayInFull)).append(" e ");
            }
 
            String speechString = speech.toString();
@@ -88,13 +87,16 @@ public class DisciplineFormatter {
        return "Nenhuma aula foi encontrada no dia solicitado";
     }
 
-    private static String makeSpeech(List<Discipline> disciplineList, String inicioRespostaAmanha) {
+    private static String makeSpeech(List<Discipline> disciplineList, String inicioResposta, String dayInFull) {
         StringBuilder speech =  new StringBuilder();
 
-        speech.append(inicioRespostaAmanha);
+        speech.append(inicioResposta);
 
         for ( Discipline discipline : disciplineList){
-            speech.append(discipline.getDisciplina()).append(" e ");
+            speech.append(discipline.getDisciplina())
+                    .append(" às ")
+                    .append(discipline.getDiaHoraInicio().get(dayInFull))
+                    .append(" e ");
         }
 
         String speechString = speech.toString();

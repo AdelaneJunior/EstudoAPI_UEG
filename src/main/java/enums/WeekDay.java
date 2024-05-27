@@ -27,6 +27,7 @@ public enum WeekDay {
     }
 
     public static WeekDay getByAbreviado(final String abreviado) {
-        return Arrays.stream(values()).filter(value -> value.getAbreviado().equals(abreviado)).findFirst().orElse(null);
+        return Arrays.stream(values()).filter(value ->
+                value.getAbreviado().equals(abreviado)).findFirst().orElse(null);
     }
 }

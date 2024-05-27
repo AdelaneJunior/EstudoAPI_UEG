@@ -13,10 +13,7 @@ public class UEGenioStreamHandler extends SkillStreamHandler {
         return Skills.standard()
                 .addRequestHandlers(
                         new LaunchRequestHandler(),
-                        new GradeIntentHandler(),
-                        new DetailedGradeIntentHandler(),
                         new ScheduleIntentHandler(),
-                        new SingUpIntentHandler(),
                         new HelpIntentHandler(),
                         new FallBackIntentHandler(),
                         new CancelandStopIntentHandler(),

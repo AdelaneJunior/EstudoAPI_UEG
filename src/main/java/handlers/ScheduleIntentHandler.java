@@ -5,13 +5,12 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
-import converter.Converter;
-import formatters.DisciplineFormatter;
-import jsonObjects.Discipline;
-import requests.HttpRequests;
+import com.google.gson.Gson;
 
-import java.util.List;
-import java.util.Map;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -31,7 +30,9 @@ public class ScheduleIntentHandler implements RequestHandler {
         IntentRequest request = (IntentRequest) input.getRequest();
         Slot diaSlot = request.getIntent().getSlots().get("dia");
         String data = diaSlot.getValue();
-        String speech = getData(data);
+        String jwt = input.getRequestEnvelope().getContext().getSystem().getUser().getAccessToken();
+        String speech = getData(data,jwt);
+
         return input.getResponseBuilder()
                 .withSimpleCard("Aulas: ", speech)
                 .withSpeech(speech)
@@ -40,25 +41,36 @@ public class ScheduleIntentHandler implements RequestHandler {
 
     }
 
-    private String getData(String data) {
-
-        HttpRequests httpRequests = new HttpRequests("02296120164", "@DEJunior06");
+    private String getData(String data, String jwt) {
 
         try {
-            httpRequests.doLogin();
-            httpRequests.enterPortalEstudante();
-            httpRequests.getClassSchedule();
-
-            if (Objects.nonNull(httpRequests.getJsonSchedule())) {
-               Map<String, List<Discipline>> diasAulas = Converter.montaHorarioSemana(
-                               Objects.requireNonNull(Converter.jsonToDiscipline(httpRequests.getJsonSchedule())));
-
-                return DisciplineFormatter.checkDayAndFormatterToSpeech(data, diasAulas);
+            if (Objects.nonNull(jwt)) {
+                System.out.println("antezderequest");
+                return getClassScheduleFromAPI(jwt,data);
             }
+            else return "TOKEN INVALIDO";
         }catch (Throwable throwable){
             throwable.printStackTrace();
+            return "Ocorreu um erro ao buscar os dados";
         }
+    }
 
-        return "nenhuma aula encontrada";
+    private String getClassScheduleFromAPI(String jwt, String day){
+        try {
+            Gson gson = new Gson();
+            HttpRequest postRequest = HttpRequest.newBuilder()
+                    .uri(new URI("https://uegenio.app.guiliano.com.br/api/make-response/"+"ScheduleByDay"))
+                    .headers("Authorization","Bearer "+jwt,
+                            "Content-Type","application/json",
+                            "Accept", "text/plain")
+                    .POST(HttpRequest.BodyPublishers.ofString("[\""+day+"\"]"))
+                    .build();
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpResponse<String> httpResponse =
+                    httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
+            return httpResponse.body();
+        } catch (Throwable error) {
+            throw new RuntimeException(error);
+        }
     }
 }
