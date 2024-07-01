@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Main {
     public static void main(String[] args) throws URISyntaxException, IOException {
 
-        HttpRequests httpRequests = new HttpRequests("02296120164", "@DEJunior06");
+        HttpRequests httpRequests = new HttpRequests("", "");
         if(httpRequests.doLogin()) {
             httpRequests.enterPortalEstudante();
             httpRequests.getClassSchedule();
