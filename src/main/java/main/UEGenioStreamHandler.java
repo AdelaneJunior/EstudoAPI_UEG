@@ -18,7 +18,7 @@ public class UEGenioStreamHandler extends SkillStreamHandler {
                         new FallBackIntentHandler(),
                         new CancelandStopIntentHandler(),
                         new HelloWorldIdentHandler())
-                .withSkillId("amzn1.ask.skill.073dca99-2bcb-4174-a6c7-df1d41604c8e")
+                .withSkillId("")
                 .build();
     }
 

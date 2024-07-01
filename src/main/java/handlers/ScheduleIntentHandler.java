@@ -59,7 +59,7 @@ public class ScheduleIntentHandler implements RequestHandler {
         try {
             Gson gson = new Gson();
             HttpRequest postRequest = HttpRequest.newBuilder()
-                    .uri(new URI("https://uegenio.app.guiliano.com.br/api/make-response/"+"ScheduleByDay"))
+                    .uri(new URI(""+""))
                     .headers("Authorization","Bearer "+jwt,
                             "Content-Type","application/json",
                             "Accept", "text/plain")
